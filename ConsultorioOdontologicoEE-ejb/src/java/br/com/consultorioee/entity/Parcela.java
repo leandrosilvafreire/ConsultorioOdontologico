@@ -28,12 +28,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Parcelas.findAll", query = "SELECT p FROM Parcelas p")})
-public class Parcelas implements Serializable {
+public class Parcela implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer parid;
@@ -58,14 +58,14 @@ public class Parcelas implements Serializable {
     @ManyToOne(optional = false)
     private Orcamento parorcamento;
 
-    public Parcelas() {
+    public Parcela() {
     }
 
-    public Parcelas(Integer parid) {
+    public Parcela(Integer parid) {
         this.parid = parid;
     }
 
-    public Parcelas(Integer parid, int parnumero, BigDecimal parvalor, boolean parpago) {
+    public Parcela(Integer parid, int parnumero, BigDecimal parvalor, boolean parpago) {
         this.parid = parid;
         this.parnumero = parnumero;
         this.parvalor = parvalor;
@@ -122,10 +122,10 @@ public class Parcelas implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Parcelas)) {
+        if (!(object instanceof Parcela)) {
             return false;
         }
-        Parcelas other = (Parcelas) object;
+        Parcela other = (Parcela) object;
         if ((this.parid == null && other.parid != null) || (this.parid != null && !this.parid.equals(other.parid))) {
             return false;
         }

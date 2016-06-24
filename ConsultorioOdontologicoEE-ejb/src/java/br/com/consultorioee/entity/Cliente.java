@@ -7,6 +7,7 @@ package br.com.consultorioee.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -39,7 +40,7 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer cliid;
@@ -132,16 +133,26 @@ public class Cliente implements Serializable {
     private String clientecol;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orccliente")
-    private List<Orcamento> orcamentoList;
+    private List<Orcamento> orcamentoList = new LinkedList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anacliente")
-    private List<Anamnese> anamneseList;
+    private List<Anamnese> anamneseList = new LinkedList<>();
 
     public Cliente() {
     }
 
     public Cliente(Integer cliid) {
         this.cliid = cliid;
+    }
+    
+    public void addOrcamento(Orcamento orcamento){
+        orcamento.setOrccliente(this);
+        getOrcamentoList().add(orcamento);
+    }
+    
+    public void addAnamnese(Anamnese anamnese){
+        anamnese.setAnacliente(this);
+        getAnamneseList().add(anamnese);
     }
 
     public Cliente(Integer cliid, String clinome, int cliidade, String cliendereco, String cliestado, String clicidade, String clipai, String climae) {

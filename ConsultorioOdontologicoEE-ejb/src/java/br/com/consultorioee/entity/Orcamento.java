@@ -8,11 +8,14 @@ package br.com.consultorioee.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +45,7 @@ public class Orcamento implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer orcid;
@@ -70,7 +73,8 @@ public class Orcamento implements Serializable {
     
     @Size(max = 9)
     @Column(length = 9)
-    private String orcpagamento;
+    @Enumerated(EnumType.STRING)
+    private TipoPagamento orcpagamento;
     
     private Integer orctimes;
     
@@ -83,13 +87,13 @@ public class Orcamento implements Serializable {
     private Usuario orcdentista;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parorcamento")
-    private List<Parcelas> parcelasList;
+    private List<Parcela> parcelasList = new LinkedList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oritorcamento")
-    private List<Orcamentoitem> orcamentoitemList;
+    private List<Orcamentoitem> orcamentoitemList = new LinkedList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anaorcamento")
-    private List<Anamnese> anamneseList;
+    private List<Anamnese> anamneseList = new LinkedList<>();
 
     public Orcamento() {
     }
@@ -98,15 +102,32 @@ public class Orcamento implements Serializable {
         this.orcid = orcid;
     }
 
-    public Orcamento(Integer orcid, Date orcdata, Date orchora) {
+    public Orcamento(Integer orcid, Date orcdata, Date orchora, TipoPagamento orcpagamento) {
         this.orcid = orcid;
         this.orcdata = orcdata;
         this.orchora = orchora;
+        this.orcpagamento = orcpagamento;
     }
 
     public Integer getOrcid() {
         return orcid;
     }
+    
+    public void addItem(Orcamentoitem ori){
+        ori.setOritorcamento(this);
+        orcamentoitemList.add(ori);
+    }
+    
+    public void addAnamnese(Anamnese anamnese){
+        anamnese.setAnaorcamento(this);
+        getAnamneseList().add(anamnese);
+    }
+    
+    public void addParcela(Parcela parcela){
+        parcela.setParorcamento(this);
+        getParcelasList().add(parcela);
+    }
+           
 
     public void setOrcid(Integer orcid) {
         this.orcid = orcid;
@@ -144,11 +165,11 @@ public class Orcamento implements Serializable {
         this.orctotal = orctotal;
     }
 
-    public String getOrcpagamento() {
+    public TipoPagamento getOrcpagamento() {
         return orcpagamento;
     }
 
-    public void setOrcpagamento(String orcpagamento) {
+    public void setOrcpagamento(TipoPagamento orcpagamento) {
         this.orcpagamento = orcpagamento;
     }
 
@@ -177,11 +198,11 @@ public class Orcamento implements Serializable {
     }
 
     @XmlTransient
-    public List<Parcelas> getParcelasList() {
+    public List<Parcela> getParcelasList() {
         return parcelasList;
     }
 
-    public void setParcelasList(List<Parcelas> parcelasList) {
+    public void setParcelasList(List<Parcela> parcelasList) {
         this.parcelasList = parcelasList;
     }
 
