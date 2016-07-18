@@ -1,3 +1,5 @@
 /build/
 /dist/
 /ConsultorioOdontologicoEE-war/dist/
+/ConsultorioOdontologicoEE-ejb/build/
+/ConsultorioOdontologicoEE-ejb/dist/

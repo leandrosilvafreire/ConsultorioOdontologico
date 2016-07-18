@@ -5,7 +5,7 @@
  */
 package br.com.consultorio.repositorio;
 
-import br.com.consultorioee.entity.Cliente;
+import br.com.consultorio.entity.Cliente;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

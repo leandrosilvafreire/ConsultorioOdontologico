@@ -1,8 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 Leandro
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package br.com.consultorio.repositorio;
 
 import java.io.Serializable;
@@ -12,73 +24,63 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Leandro
+ * @author dyego.carmo
  */
-public abstract class BasicoRepositorio {
+abstract class BasicoRepositorio {
+
+    private static final long serialVersionUID = 1L;
     
     private final EntityManager entityManager;
-    
+
     public BasicoRepositorio(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
     
-    protected EntityManager getEntityManager(){
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
     
-    //salva um obejeto
-    protected <T> T addEntity(Class<T> classToCast, Object entity){
+    protected <T> T addEntity(Class<T> classToCast,Object entity) {
         getEntityManager().persist(entity);
-        return (T) entity;
+        return (T) entity; 
     }
     
-    //Retorna um obejeto
-    protected <T> T getEntity(Class<T> classToCast, Serializable pk){
+    protected <T> T getEntity(Class<T> classToCast,Serializable pk) {
         return getEntityManager().find(classToCast, pk);
     }
     
-    //Atualiza um obejeto
-    protected <T> T setEntity(Class<T> classToCast, Object entity){
-        Object updateObj = getEntityManager().merge(entity);
-        return (T) updateObj;
+    protected <T> T setEntity(Class<T> classToCast,Object entity) {
+        Object updatedObj = getEntityManager().merge(entity);
+        return (T) updatedObj;
     }
     
-    //remove um obejeto
     protected void removeEntity(Object entity) {
-        Object upObject = getEntityManager().merge(entity);
-        getEntityManager().remove(upObject);
-        
+        Object updateObj = getEntityManager().merge(entity);
+        getEntityManager().remove(updateObj);
     }
     
-    //Método que vai retornar uma lista
-    protected <T> List<T> getPureList(Class<T> classToCast,String query,Object... values){
-        
+    protected <T> List<T> getPureList(Class<T> classToCast,String query,Object... values) {
         Query qr = createQuery(query, values);
         return qr.getResultList();
-        
     }
     
-    //Método que vai retornar uma query comando hql
-    protected <T> T getPuroPojo(Class<T> classToCast,String query,Object... values){
+    protected <T> T getPurePojo(Class<T> classToCast,String query,Object... values) {
         Query qr = createQuery(query, values);
-        return  (T) qr.getSingleResult();
+        return (T) qr.getSingleResult();
     }
     
-    protected int executeCommand(String query, Object... values){
+    protected int executeCommand(String query,Object... values) {
         Query qr = createQuery(query, values);
         return qr.executeUpdate();
     }
     
-    private Query createQuery(String query, Object... values){
+    private Query createQuery(String query,Object... values) {
         Query qr = getEntityManager().createQuery(query);
-        for(int i=0; i<values.length; i++){
-            qr.setParameter(i+1, values[i]);
+        for (int i = 0; i < values.length; i++) {
+            qr.setParameter((i+1), values[i]);
         }
         return qr;
     }
-    
-    
-    
     
     
     

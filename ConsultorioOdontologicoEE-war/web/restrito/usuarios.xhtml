@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./base.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="titleOfPage">
+        Usuários do Sistema
+    </ui:define>
+
+    <ui:define name="content">
+        <h:messages/>
+        <h:form>
+            <table>
+                <tr>
+                    <td width="20%">Localizar:</td>
+                    <td width="75%"><h:inputText style="width: 100%" value="#{usuarioControle.localizar}" /></td>
+                    <td width="5%"><h:commandButton action="#{usuarioControle.doLocalizar()}" value="Localizar"/></td>
+                </tr>
+            </table>
+            <h:dataTable styleClass="tabelaBasica" value="#{usuarioControle.usuarioFiltardo}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        Id
+                    </f:facet>
+                    #{item.usid}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Nome
+                    </f:facet>
+                    #{item.usunome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Administrador?
+                    </f:facet>
+                    <h:graphicImage rendered="#{item.usuadministrador eq true}" value="/resources/images/check.gif"/>
+                    <h:graphicImage rendered="#{item.usuadministrador eq false}" value="/resources/images/notchech.gif"/>
+                    #{item.usuadministrador}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Dentista?
+                    </f:facet>
+                    <h:graphicImage rendered="#{item.usudentista eq true}" value="/resources/images/check.gif"/>
+                    <h:graphicImage rendered="#{item.usudentista eq false}" value="/resources/images/notchech.gif"/>
+                    #{item.usudentista}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Ações
+                    </f:facet>
+                    <h:commandLink title="Alterar" action="#{usuarioControle.doAlterar()}"> 
+                        <h:graphicImage value="/resources/images/alterar.gif"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelecionado}"/>
+                    </h:commandLink>
+                    <h:commandLink title="Alterar Senha" action="#{usuarioControle.doAlterarSenha()}"> 
+                        <h:graphicImage value="/resources/images/senha.png"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelecionado}"/>
+                    </h:commandLink>
+                    <h:commandLink title="Excluir" action="#{usuarioControle.doExcluir()}" onclick="return confirm('Tem certeza que deseja excluir este usuário?')"> 
+                        <h:graphicImage value="/resources/images/excluir.gif"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelecionado}"/>
+                    </h:commandLink>
+                    
+
+
+                </h:column>
+            </h:dataTable>   
+            <h:commandButton rendered="#{usuarioControle.loggedUser.usuadministrador eq true}" action="#{usuarioControle.doStartAdicionarUsuario()}" value="Adiconar Usuário"/>
+                
+                
+                
+        </h:form>            
+    </ui:define>
+
+</ui:composition>

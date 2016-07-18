@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.com.consultorio.service;
 
 /**
  *
  * @author Leandro
  */
-public class BasicoServico {
+abstract class BasicoServico implements java.io.Serializable {
     
 }

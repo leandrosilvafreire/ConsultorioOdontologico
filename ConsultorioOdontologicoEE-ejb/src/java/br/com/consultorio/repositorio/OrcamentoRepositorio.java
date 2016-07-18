@@ -5,8 +5,8 @@
  */
 package br.com.consultorio.repositorio;
 
-import br.com.consultorioee.entity.Orcamento;
-import br.com.consultorioee.entity.Orcamentoitem;
+import br.com.consultorio.entity.Orcamento;
+import br.com.consultorio.entity.Orcamentoitem;
 import java.util.List;
 import javax.persistence.EntityManager;
 

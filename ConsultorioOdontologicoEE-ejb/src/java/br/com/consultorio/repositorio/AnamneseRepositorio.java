@@ -5,9 +5,9 @@
  */
 package br.com.consultorio.repositorio;
 
-import br.com.consultorioee.entity.Anamnese;
-import br.com.consultorioee.entity.Cliente;
-import br.com.consultorioee.entity.Orcamento;
+import br.com.consultorio.entity.Anamnese;
+import br.com.consultorio.entity.Cliente;
+import br.com.consultorio.entity.Orcamento;
 import java.util.List;
 import javax.persistence.EntityManager;
 

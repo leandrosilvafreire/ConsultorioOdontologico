@@ -5,7 +5,7 @@
  */
 package br.com.consultorio.service;
 
-import br.com.consultorioee.entity.Servico;
+import br.com.consultorio.entity.Servico;
 import com.sun.org.apache.regexp.internal.recompile;
 import java.math.BigDecimal;
 import java.util.List;
@@ -48,29 +48,29 @@ public class ServicoServicoTest {
           instance = (ServicoServico)container.getContext().lookup("java:global/classes/ServicoServico");
           
           servum = new Servico();
-          servum.setSernome("Service Name of um" + new Random().nextInt());
+          servum.setSernome("Servico Name of um" + new Random().nextInt());
           servum.setSercusto(new BigDecimal(new Random().nextFloat()));
           
           servdois = new Servico();
-          servdois.setSernome("Service Name of dois" + new Random().nextInt());
+          servdois.setSernome("Servico Name of dois" + new Random().nextInt());
           servdois.setSercusto(new BigDecimal(new Random().nextFloat()));
           
           servtres = new Servico();
-          servtres.setSernome("Service Name of três" + new Random().nextInt());
+          servtres.setSernome("Servico Name of três" + new Random().nextInt());
           servtres.setSercusto(new BigDecimal(new Random().nextFloat()));
           
-          servum = instance.addService(servum);
-          servdois = instance.addService(servdois);
-          servtres = instance.addService(servtres);
+          servum = instance.addServico(servum);
+          servdois = instance.addServico(servdois);
+          servtres = instance.addServico(servtres);
           
           
     }
     
     @After
     public void tearDown() {
-        instance.removeService(servum);
-        instance.removeService(servdois);
-        instance.removeService(servtres);
+        instance.removeServico(servum);
+        instance.removeServico(servdois);
+        instance.removeServico(servtres);
         instance = null;
         container.close();
         container = null;
@@ -85,9 +85,9 @@ public class ServicoServicoTest {
         Servico servico = new Servico();
         servico.setSernome("Test of add method "+ new Random().nextInt());
         servico.setSercusto(new BigDecimal(new Random().nextFloat()));
-        Servico result = instance.addService(servico);
-        Servico expResult = instance.getService(result.getSerid());
-        instance.removeService(servico);
+        Servico result = instance.addServico(servico);
+        Servico expResult = instance.getServico(result.getSerid());
+        instance.removeServico(servico);
         assertEquals(expResult, result);
     }
 
@@ -100,8 +100,8 @@ public class ServicoServicoTest {
         Servico servico = servum;
         String newName = "The new name of Service "+ new Random().nextInt();
         servico.setSernome(newName);
-        Servico result = instance.setService(servico);
-        Servico expResult = instance.getService(servico.getSerid());
+        Servico result = instance.setServico(servico);
+        Servico expResult = instance.getServico(servico.getSerid());
         assertEquals(newName, expResult.getSernome());
     }
 
@@ -114,10 +114,10 @@ public class ServicoServicoTest {
         Servico servico = new Servico();
         servico.setSernome("The Removbed Name of "+ new Random().nextInt());
         servico.setSercusto(new BigDecimal(new Random().nextFloat()));
-        Servico added = instance.addService(servico);
-        added = instance.getService(added.getSerid());
-        instance.removeService(servico);
-        Servico removedService = instance.getService(added.getSerid());
+        Servico added = instance.addServico(servico);
+        added = instance.getServico(added.getSerid());
+        instance.removeServico(servico);
+        Servico removedService = instance.getServico(added.getSerid());
         assertNull(removedService);
        
     }
@@ -130,7 +130,7 @@ public class ServicoServicoTest {
         System.out.println("getService");
         int idOfService = servtres.getSerid();
         Servico expResult = servtres;
-        Servico result = instance.getService(idOfService);
+        Servico result = instance.getServico(idOfService);
         assertEquals(expResult, result);
     }
 
@@ -140,7 +140,7 @@ public class ServicoServicoTest {
     @Test
     public void testGetServices() throws Exception {
         System.out.println("getServices");
-        List<Servico> result = instance.getServices();
+        List<Servico> result = instance.getServicos();
         assertEquals(3, result.size());
     }
 
@@ -150,11 +150,11 @@ public class ServicoServicoTest {
     @Test
     public void testGetServiceByName() throws Exception {
         System.out.println("getServiceByName");
-        assertEquals(3, instance.getServiceByName("Service Name of ").size());
-        assertEquals(1, instance.getServiceByName("Service Name of one").size());
-        assertEquals(1, instance.getServiceByName("Service Name of Two").size());
-        assertEquals(1, instance.getServiceByName("Service Name of Three").size());
-        assertEquals(0, instance.getServiceByName("hjhjhjhj " + new Random()).size());
+        assertEquals(3, instance.getServicosByName("Service Name of ").size());
+        assertEquals(1, instance.getServicosByName("Service Name of one").size());
+        assertEquals(1, instance.getServicosByName("Service Name of Two").size());
+        assertEquals(1, instance.getServicosByName("Service Name of Three").size());
+        assertEquals(0, instance.getServicosByName("hjhjhjhj " + new Random()).size());
        
       
     }

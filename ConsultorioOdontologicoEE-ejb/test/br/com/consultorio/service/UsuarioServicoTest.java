@@ -5,7 +5,7 @@
  */
 package br.com.consultorio.service;
 
-import br.com.consultorioee.entity.Usuario;
+import br.com.consultorio.entity.Usuario;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.embeddable.EJBContainer;
@@ -114,7 +114,7 @@ public class UsuarioServicoTest {
         System.out.println("setUsuario");
         Usuario usuario = usuarioTres;
         Usuario expResult = usuarioTres;
-        usuario.setUsunome("ChangedUserName " + new Random().nextInt());
+        usuario.setUsunome("ChangedUsuarioName " + new Random().nextInt());
         Usuario result = instance.setUsuario(usuario);
         Usuario resultFromGet = instance.getUsuario(usuario.getUsid());
         assertEquals(expResult.getUsunome(), result.getUsunome());
@@ -174,11 +174,11 @@ public class UsuarioServicoTest {
     }
 
     /**
-     * Test of getUserByLoginPassword method, of class UsuarioServico.
+     * Test of getUsuarioByLoginPassword method, of class UsuarioServico.
      */
     //@Test
-    public void testGetUserByLoginPassword() throws Exception {
-        System.out.println("getUserByLoginPassword");
+    public void testGetUsuarioByLoginPassword() throws Exception {
+        System.out.println("getUsuarioByLoginPassword");
         String login = "";
         String password = "";
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
@@ -200,7 +200,7 @@ public class UsuarioServicoTest {
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         UsuarioServico instance = (UsuarioServico)container.getContext().lookup("java:global/classes/UsuarioServico");
         List<Usuario> expResult = null;
-        List<Usuario> result = instance.getUsuarios();
+        List<Usuario> result = instance.getUsers();
         assertEquals(expResult, result);
         container.close();
         // TODO review the generated test code and remove the default call to fail.

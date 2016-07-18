@@ -5,7 +5,7 @@
  */
 package br.com.consultorio.repositorio;
 
-import br.com.consultorioee.entity.Servico;
+import br.com.consultorio.entity.Servico;
 import java.util.List;
 import javax.persistence.EntityManager;
 
