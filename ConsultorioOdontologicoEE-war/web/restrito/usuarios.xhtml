@@ -11,7 +11,7 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:messages/>
+        <h:messages errorClass="msg_erro"/>
         <h:form>
             <table>
                 <tr>
@@ -20,7 +20,7 @@
                     <td width="5%"><h:commandButton action="#{usuarioControle.doLocalizar()}" value="Localizar"/></td>
                 </tr>
             </table>
-            <h:dataTable styleClass="tabelaBasica" value="#{usuarioControle.usuarioFiltardo}" var="item">
+            <h:dataTable styleClass="tabelaBasica" value="#{usuarioControle.usrFiltrado}" var="item">
                 <h:column>
                     <f:facet name="header">
                         Id
@@ -32,6 +32,12 @@
                         Nome
                     </f:facet>
                     #{item.usunome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Login
+                    </f:facet>
+                    #{item.usulogin}
                 </h:column>
                 <h:column>
                     <f:facet name="header">
@@ -49,28 +55,28 @@
                     <h:graphicImage rendered="#{item.usudentista eq false}" value="/resources/images/notchech.gif"/>
                     #{item.usudentista}
                 </h:column>
-                <h:column>
+                <h:column rendered="#{usuarioControle.loggedUser.usuadministrador eq true}">
                     <f:facet name="header">
                         Ações
                     </f:facet>
-                    <h:commandLink title="Alterar" action="#{usuarioControle.doAlterar()}"> 
+                    <h:commandLink title="Alterar" action="#{usuarioControle.doStartAlterar()}"> 
                         <h:graphicImage value="/resources/images/alterar.gif"/>
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelecionado}"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelected}"/>
                     </h:commandLink>
-                    <h:commandLink title="Alterar Senha" action="#{usuarioControle.doAlterarSenha()}"> 
+                    <h:commandLink title="Alterar Senha" action="#{usuarioControle.doStartAlterarSenha()}"> 
                         <h:graphicImage value="/resources/images/senha.png"/>
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelecionado}"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelected}"/>
                     </h:commandLink>
-                    <h:commandLink title="Excluir" action="#{usuarioControle.doExcluir()}" onclick="return confirm('Tem certeza que deseja excluir este usuário?')"> 
+                    <h:commandLink title="Excluir" action="#{usuarioControle.doFinishExcluir()}" onclick="return confirm('Tem certeza que deseja excluir este usuário?')"> 
                         <h:graphicImage value="/resources/images/excluir.gif"/>
-                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelecionado}"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioControle.usuarioSelected}"/>
                     </h:commandLink>
                     
 
 
                 </h:column>
             </h:dataTable>   
-            <h:commandButton rendered="#{usuarioControle.loggedUser.usuadministrador eq true}" action="#{usuarioControle.doStartAdicionarUsuario()}" value="Adiconar Usuário"/>
+            <h:commandButton rendered="#{usuarioControle.loggedUser.usuadministrador eq true}" action="#{usuarioControle.doStartAddUsuario()}" value="Adiconar Usuário"/>
                 
                 
                 

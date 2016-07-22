@@ -5,6 +5,7 @@
  */
 package br.com.consultorio.entity;
 
+import br.com.consultorio.entity.validator.LoginPadrao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,6 +52,7 @@ public class Usuario implements Serializable {
     @Length(min=3, max = 70, message = "Você precisa especificar um nome com no mínimo 3 caracteres")
     private String usunome;
     
+    @LoginPadrao(message = "Este login não esta dentro do login padrão!")
     @Basic(optional = false)
     @NotNull
     @Length(min = 5, max = 70, message = "Você precisa de um login com no minímo 5 caracteres")

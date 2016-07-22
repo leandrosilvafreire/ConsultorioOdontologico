@@ -64,9 +64,14 @@ public class UsuarioServico extends BasicoServico {
         return usuarioRepositorio.getUsuario(id);
     }
     
-    public Usuario setUsuario(Usuario usuario) {
+    //Altera um usuario e verifica se não fro dentista nem usuario não altera
+     public Usuario setUsuario(Usuario usuario) throws AcessoInvalidoException {
+        if (!usuario.getUsuadministrador() && !usuario.getUsudentista()) {
+            throw new AcessoInvalidoException("O usuário atual não possui um acesso válido.");
+        }
         return usuarioRepositorio.setUsuario(usuario);
     }
+
     
     public void removeUsuario(Usuario usuario) {
         usuarioRepositorio.removeUsuario(usuario);
@@ -76,9 +81,15 @@ public class UsuarioServico extends BasicoServico {
         usuarioRepositorio.setPassword(password, ifOfUser);
     }
     
-    public Usuario addUsuario(Usuario usuario) {
+    
+    //Adiciona um novo usuario e faz uma vrerificação se não for dentista nem administrador chama o cros campo
+    public Usuario addUsuario(Usuario usuario) throws AcessoInvalidoException {
+        if (!usuario.getUsuadministrador() && !usuario.getUsudentista()) {
+            throw new AcessoInvalidoException("O usuário atual não possui um acesso válido.");
+        }
         return usuarioRepositorio.addUsuario(usuario);
     }
+    
     
     public List<Usuario> getUserByName(String nome){
         return usuarioRepositorio.getUsuariosByName(nome);

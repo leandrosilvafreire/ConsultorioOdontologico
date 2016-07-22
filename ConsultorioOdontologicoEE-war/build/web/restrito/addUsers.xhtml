@@ -11,31 +11,31 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:messages/>
+        <h:messages errorClass="msg_erro"/>
         <h:form>
             <table>
                 <tr>
                     <td>Nome </td>
-                    <td><h:inputText value="#{usuarioControle.usuarioSelecionado.usunome}" /></td>
+                    <td><h:inputText value="#{usuarioControle.usuarioSelected.usunome}" /></td>
                 </tr>
                 <tr>
                     <td>Login </td>
-                    <td><h:inputText value="#{usuarioControle.usuarioSelecionado.usulogin}" /></td>
+                    <td><h:inputText value="#{usuarioControle.usuarioSelected.usulogin}" /></td>
                 </tr>
                 <tr>
                     <td>Senha </td>
-                    <td><h:inputSecret value="#{usuarioControle.usuarioSelecionado.uspassword}" /></td>
+                    <td><h:inputSecret value="#{usuarioControle.usuarioSelected.uspassword}" /></td>
                 </tr>
                 <tr>
                     <td>Dentista ?</td>
-                    <td><h:selectBooleanCheckbox value="#{usuarioControle.usuarioSelecionado.usudentista}" /></td>
+                    <td><h:selectBooleanCheckbox value="#{usuarioControle.usuarioSelected.usudentista}" /></td>
                 </tr>
                 <tr>
                     <td>Administrador ?</td>
-                    <td><h:selectBooleanCheckbox  value="#{usuarioControle.usuarioSelecionado.usuadministrador}" /></td>
+                    <td><h:selectBooleanCheckbox  value="#{usuarioControle.usuarioSelected.usuadministrador}" /></td>
                 </tr>
             </table>
-            <h:commandButton action="#{usuarioControle.doFinishAdicionarUsuario()}" value="Cadastrar"/> &nbsp; <h:commandButton action="usuarios.faces" value="Cancelar" immediate="true"/>
+            <h:commandButton action="#{usuarioControle.doFinishAddUsuario()}" value="Cadastrar"/> &nbsp; <h:commandButton action="usuarios.faces" value="Cancelar" immediate="true"/>
                 
                 
                 
