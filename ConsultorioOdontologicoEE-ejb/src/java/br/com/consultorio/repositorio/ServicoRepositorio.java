@@ -44,10 +44,9 @@ public class ServicoRepositorio extends BasicoRepositorio{
         return getPureList(Servico.class, "select serv from Servico serv");
     }
     
-    //lista pelo nome do servico
-    public List<Servico> getServicoByName(String name){
-        return getPureList(Servico.class, "select serv from Servico serv where serv.sernome like ?1",name+"*");
-        
+     public List<Servico> getServicosByName(String name) {
+        return getPureList(Servico.class, "select srv from Servico srv where srv.sernome like ?1", name + "%");
     }
+
     
 }

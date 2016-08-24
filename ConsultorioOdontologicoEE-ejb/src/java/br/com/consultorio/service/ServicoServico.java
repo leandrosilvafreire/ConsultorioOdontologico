@@ -74,7 +74,8 @@ public class ServicoServico extends BasicoServico {
     }
     
     public List<Servico> getServicosByName(String name) {
-        return servicoRepositorio.getServicoByName(name);
+        return servicoRepositorio.getServicosByName(name);
     }
+
     
 }

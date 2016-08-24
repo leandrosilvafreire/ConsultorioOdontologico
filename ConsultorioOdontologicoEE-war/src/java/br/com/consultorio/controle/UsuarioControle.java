@@ -91,8 +91,7 @@ public class UsuarioControle extends BasicoControle implements java.io.Serializa
         loggedUser = null;
         loggedUser = userService.getUserByLoginPassword(userName, password);
         if (loggedUser == null) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario / Senha Inválidos", "Usuario / Senha Inválidos");
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+            createFacesErrorMessage("Usuário / Senha Inválidos");
             return "/login.faces";
         } else {
             return "/restrito/index.faces?faces-redirect=true";

@@ -1,9 +1,28 @@
+.linhaPar{
+    background-color: lavender;
+}
+
+.linhaImpar{
+    background-color: antiquewhite;
+}
+
+
+
 .tabelaBasica{
     font-size: small;
     border-width: thin;
     border-style: groove;
     width: 100%;
     text-align: center;
+}
+
+.tabelaBasica th:hover{
+    
+}
+
+.tabelaBasica tr:hover{
+    background-color: #045491;
+    color: white;
 }
 
 
