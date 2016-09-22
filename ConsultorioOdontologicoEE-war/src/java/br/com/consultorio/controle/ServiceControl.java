@@ -47,6 +47,22 @@ public class ServiceControl extends BasicoControle implements java.io.Serializab
         return "/restrito/services.faces";
     }
     
+    public String doFinishExcluir(){
+        srvFiltrado = null;
+        serviceService.removeServico(serviceSelected);
+        return "/restrito/services.faces";
+    }
+    
+    public String doStartAlterar(){
+        return "/restrito/editService.faces";
+    }
+    
+    public String doFinishAlterar(){
+        srvFiltrado = null;
+        serviceService.setServico(serviceSelected);
+        return "/restrito/services.faces";
+    }
+    
     public List<Servico> getServices() {
         return serviceService.getServicos();
     }

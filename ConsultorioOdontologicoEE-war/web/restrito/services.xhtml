@@ -7,7 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="titleOfPage">
-        Servicos Disponiveis
+        Serviços Disponíveis
     </ui:define>
 
     <ui:define name="content">
@@ -15,12 +15,12 @@
         <h:form>
             <table>
                 <tr>
-                    <td width="22%">Servico a localizar :</td>
+                    <td width="22%">Serviço a localizar :</td>
                     <td width="73%"><h:inputText style="width: 100%;" value="#{serviceControl.localizar}"/></td>
                     <td width="5%"><h:commandButton action="#{serviceControl.doLocalizar()}" value="Localizar"/></td>
                 </tr>
             </table>
-            <h:dataTable rowClasses="linhaPar,linhaImpar" styleClass="tabelaBasica" var="item" value="#{serviceControl.srvFiltrado}">
+            <h:dataTable rowClasses="linhaPar, linhaImpar" styleClass="tabelaBasica" var="item" value="#{serviceControl.srvFiltrado}">
                 <h:column>
                     <f:facet name="header">
                         Id
@@ -39,13 +39,21 @@
                     </f:facet>
                     <h:outputText value="#{item.sercusto}"><f:convertNumber type="currency"/></h:outputText>
                 </h:column>
-                <h:column rendered="#{userControl.loggedUser.usuAdministrator}">
+                <h:column rendered="#{usuarioControle.loggedUser.usuadministrador eq true}">
                     <f:facet name="header">
-                        Acoes
+                        Ações
                     </f:facet>
+                    <h:commandLink title="Alterar" action="#{serviceControl.doStartAlterar()}"> 
+                        <h:graphicImage value="/resources/images/alterar.gif"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{serviceControl.serviceSelected}"/>
+                    </h:commandLink>
+                    <h:commandLink title="Excluir" action="#{serviceControl.doFinishExcluir()}" onclick="return confirm('Tem certeza que deseja excluir este serviço?')"> 
+                        <h:graphicImage value="/resources/images/excluir.gif"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{serviceControl.serviceSelected}"/>
+                    </h:commandLink>
                 </h:column>
             </h:dataTable>
-            <h:commandButton action="#{serviceControl.doStartAddService()}" rendered="#{userControl.loggedUser.usuAdministrator}" value="Adicionar um novo servico"/>
+            <h:commandButton action="#{serviceControl.doStartAddService()}" rendered="#{usuarioControle.loggedUser.usuadministrador eq true}" value="Adicionar um novo serviço"/>
         </h:form>
     </ui:define>
 

@@ -7,7 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="titleOfPage">
-        Serviços Disponíveis - Novo
+        Serviços Disponíveis - Editar Serviço
     </ui:define>
 
     <ui:define name="content">
@@ -23,7 +23,7 @@
                     <td><h:inputText id="custoProduto" value="#{serviceControl.serviceSelected.sercusto}"><f:convertNumber type="currency"/></h:inputText></td>
                 </tr>
             </table>
-            <h:commandButton action="#{serviceControl.doFinishAddService()}" value="Cadastrar"/> &nbsp; <h:commandButton action="services.faces" value="Cancelar" immediate="true"/>
+            <h:commandButton action="#{serviceControl.doFinishAlterar()}" value="Salvar"/> &nbsp; <h:commandButton action="services.faces" value="Cancelar" immediate="true"/>
         </h:form>
     </ui:define>
 
