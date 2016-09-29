@@ -43,6 +43,9 @@ public class ServiceControl extends BasicoControle implements java.io.Serializab
 
     public String doFinishAddService() {
         srvFiltrado = null;
+        if(existsViolationsForJSF(serviceSelected)){
+            return "/restrito/addService.faces";
+        }
         serviceService.addServico(serviceSelected);
         return "/restrito/services.faces";
     }
@@ -59,6 +62,9 @@ public class ServiceControl extends BasicoControle implements java.io.Serializab
     
     public String doFinishAlterar(){
         srvFiltrado = null;
+        if(existsViolationsForJSF(serviceSelected)){
+            return "/restrito/addService.faces";
+        }
         serviceService.setServico(serviceSelected);
         return "/restrito/services.faces";
     }
