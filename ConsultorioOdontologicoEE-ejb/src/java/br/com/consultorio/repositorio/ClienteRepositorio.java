@@ -61,4 +61,20 @@ public class ClienteRepositorio extends BasicoRepositorio{
     public List<Cliente> getClientesComPagamentoEmAberto(int idOfCliente){
         return getPureList(Cliente.class, "select par.parorcamento.orccliente from Parcela par where par.parpago = ?1", idOfCliente,Boolean.FALSE);
     }
+    
+    public Date getUltimoAtendimento(int idOfCustomer){
+        try{
+        Date toReturn = getPurePojo(Date.class, "select max(orc.orcData) from Orcamento orc where orc.orcCliente.cliid = ?1", idOfCustomer);
+        return toReturn;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public int getClientesCount(){
+        Long toReturn = getPurePojo(Long.class, "select count(cus) from Cliente cus");
+        if(toReturn!=null)return toReturn.intValue();
+        return 0;
+    }
 }

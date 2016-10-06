@@ -5,14 +5,18 @@
         <group>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/ServiceControl.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/services.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/servlet/filtro/AutenticacaoFiltro.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/editService.xhtml</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/ClienteControle.java</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/UsuarioControle.java</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/clientes.xhtml</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/BasicoControle.java</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/editUserPassword.xhtml</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/menu.xhtml</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/servlet/filtro/AutenticacaoFiltro.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/addService.xhtml</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/usuarios.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/UsuarioControle.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/BasicoControle.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/resources/css/cssLayout.css</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/menu.xhtml</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/addCliente.xhtml</file>
         </group>
     </open-files>
 </project-private>

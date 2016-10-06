@@ -19,6 +19,7 @@ package br.com.consultorio.service;
 
 import br.com.consultorio.repositorio.ClienteRepositorio;
 import br.com.consultorio.entity.Cliente;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -79,5 +80,13 @@ public class ClienteServico extends BasicoServico {
     
     public List<Cliente> getClientesComPagamentoEmAberto(int ifOfCliente) {
         return customerRepositorio.getClientesComPagamentoEmAberto(ifOfCliente);
+    }
+    
+    public Date getUltimoAtendimento(Integer idOfCustomer){
+        return customerRepositorio.getUltimoAtendimento(idOfCustomer);
+    }
+    
+    public int getClientesCount(){
+        return customerRepositorio.getClientesCount();
     }
 }

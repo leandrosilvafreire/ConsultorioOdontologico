@@ -54,7 +54,7 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
-    private int cliidade;
+    private Integer cliidade;
     
     @Basic(optional = false)
     @NotNull
@@ -182,11 +182,11 @@ public class Cliente implements Serializable {
         this.clinome = clinome;
     }
 
-    public int getCliidade() {
+    public Integer getCliidade() {
         return cliidade;
     }
 
-    public void setCliidade(int cliidade) {
+    public void setCliidade(Integer cliidade) {
         this.cliidade = cliidade;
     }
 

@@ -6,6 +6,7 @@
 package br.com.consultorio.controle;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -24,6 +25,8 @@ public abstract class BasicoControle implements java.io.Serializable {
     
     
     private static final long serialVersionUID = 1L;
+    
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     protected void createFacesErrorMessage(String msg) {
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
@@ -48,5 +51,11 @@ public abstract class BasicoControle implements java.io.Serializable {
         }
         return true;
     }
+
+    public SimpleDateFormat getSdf() {
+        return sdf;
+    }
+    
+    
 }
 
