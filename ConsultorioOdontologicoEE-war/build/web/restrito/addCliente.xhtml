@@ -13,49 +13,92 @@
     <ui:define name="content">
         <h:messages errorClass="msg_erro"/>
         <h:form>
-            <table>
-                <tr>
-                    <td>Nome </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.clinome}" /></td>
-                </tr>
-                 <tr>
-                    <td>Idade </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.cliidade}" /></td>
-                </tr>
-                 <tr>
-                    <td>Endereço </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.cliendereco}" /></td>
-                </tr>
-                 <tr>
-                    <td>Estado </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.cliestado}" /></td>
-                </tr>
-                 <tr>
-                    <td>Cidade </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.clicidade}" /></td>
-                </tr>
-                 <tr>
-                    <td>Complemento </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.clicomple}" /></td>
-                </tr>
-                 <tr>
-                    <td>Pai </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.clipai}" /></td>
-                </tr>
-                 <tr>
-                    <td>Mãe </td>
-                    <td><h:inputText value="#{clienteControle.selectedCliente.climae}" /></td>
-                </tr>
-                
-                
-                
-                
-                <tr>
-                    <td>Administrador ?</td>
-                    <td><h:selectBooleanCheckbox  value="#{usuarioControle.usuarioSelected.usuadministrador}" /></td>
-                </tr>
-            </table>
-            <h:commandButton action="#{usuarioControle.doFinishAddUsuario()}" value="Cadastrar"/> &nbsp; <h:commandButton action="usuarios.faces" value="Cancelar" immediate="true"/> 
+            <f:validateBean>
+                <table width="100%">
+                    <tr>
+                        <td width="20%">Nome </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clinome}" /></td>
+                    </tr>
+
+                    <tr>
+                        <td width="20%">Endereço </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.cliendereco}" /></td> 
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td width="20%">Data Nacimento </td>
+                        <td width="10%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clidatanascimento}" ><f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText></td>
+                        <td width="10%">Estado </td>
+                        <td width="10%"><h:inputText style="width: 100%" maxlength="2" value="#{clienteControle.selectedCliente.cliestado}" /></td>
+                        <td width="10%">Cidade </td>
+                        <td width="40%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clicidade}" /></td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td width="20%">Celular </td>
+                        <td width="30%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clicelular}" /></td>
+                        <td width="20%">Telefone </td>
+                        <td width="30%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clitelefone}" /></td>
+                    </tr>
+
+
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td width="20%">Complemento </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clicomple}" /></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Pai </td>
+                        <td><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clipai}" /></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Mãe </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.climae}" /></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Observação </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.cliobs}" /></td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                Profissional
+                <hr/>
+                <br/>
+                <table width="100%">
+
+                    <tr>
+                        <td width="20%">Empresa </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clitrabalhonome}" /></td>
+                    </tr>
+
+                    <tr>
+                        <td width="20%">Ocupação </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.cliocupacao}" /></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Telefone Comercial </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clitrabalho}" /></td>
+                    </tr>
+
+                    <tr>
+                        <td width="20%">Endereço Comercial </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clitrabalhoendereco}" /></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Observação Empresa </td>
+                        <td width="80%"><h:inputText style="width: 100%" value="#{clienteControle.selectedCliente.clitrabalhoobs}" /></td>
+                    </tr>
+
+
+                </table>
+            </f:validateBean>
+            <br/>
+            <br/>
+            <h:commandButton action="#{clienteControle.doFinishAddCliente()}" value="Cadastrar"/> &nbsp; <h:commandButton action="clientes.faces" value="Cancelar" immediate="true"/> 
         </h:form>            
     </ui:define>
 </ui:composition>

@@ -6,7 +6,9 @@
 package br.com.consultorio.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -20,6 +22,8 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -47,14 +51,14 @@ public class Cliente implements Serializable {
     
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 70)
+    @Size(min = 1, max = 70, message = "O nome do cliente é obrigatório!")
     @Column(nullable = false, length = 70)
     private String clinome;
     
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
-    private Integer cliidade;
+    private int cliidade;
     
     @Basic(optional = false)
     @NotNull
@@ -64,7 +68,7 @@ public class Cliente implements Serializable {
     
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
+    @Size(min = 2, max = 2, message = "O estado deve conter a sigla!")
     @Column(nullable = false, length = 2)
     private String cliestado;
     
@@ -137,6 +141,27 @@ public class Cliente implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anacliente")
     private List<Anamnese> anamneseList = new LinkedList<>();
+    
+    
+    
+    @PrePersist
+    @PreUpdate
+    public void updateAge() {
+        System.out.println("[Cliente Entity] Calling getIdade()..");
+        setCliidade(getIdade(getClidatanascimento()));
+    }
+    
+    private int getIdade(Date nascimento) {
+        Calendar dateOfBirth = new GregorianCalendar();
+        dateOfBirth.setTime(nascimento);
+        Calendar today = Calendar.getInstance();
+        int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+        dateOfBirth.add(Calendar.YEAR, age);
+        if (today.before(dateOfBirth)) {
+            age--;
+        }
+        return age;
+    }
 
     public Cliente() {
     }
@@ -155,7 +180,7 @@ public class Cliente implements Serializable {
         getAnamneseList().add(anamnese);
     }
 
-    public Cliente(Integer cliid, String clinome, int cliidade, String cliendereco, String cliestado, String clicidade, String clipai, String climae) {
+    public Cliente(Integer cliid, String clinome, int cliidade, String cliendereco, String cliestado, String clicidade, String clipai, String climae, Date clidatanascimento) {
         this.cliid = cliid;
         this.clinome = clinome;
         this.cliidade = cliidade;
@@ -164,6 +189,7 @@ public class Cliente implements Serializable {
         this.clicidade = clicidade;
         this.clipai = clipai;
         this.climae = climae;
+        this.clidatanascimento = clidatanascimento;
     }
 
     public Integer getCliid() {
@@ -182,11 +208,11 @@ public class Cliente implements Serializable {
         this.clinome = clinome;
     }
 
-    public Integer getCliidade() {
+    public int getCliidade() {
         return cliidade;
     }
 
-    public void setCliidade(Integer cliidade) {
+    public void setCliidade(int cliidade) {
         this.cliidade = cliidade;
     }
 

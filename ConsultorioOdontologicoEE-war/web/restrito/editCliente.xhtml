@@ -7,7 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="titleOfPage">
-        Clientes do Sistema - Novo
+        Clientes do Sistema - Editando #{clienteControle.selectedCliente.clinome}
     </ui:define>
 
     <ui:define name="content">
@@ -98,7 +98,7 @@
             </f:validateBean>
             <br/>
             <br/>
-            <h:commandButton action="#{clienteControle.doFinishAddCliente()}" value="Cadastrar"/> &nbsp; <h:commandButton action="clientes.faces" value="Cancelar" immediate="true"/> 
+            <h:commandButton action="#{clienteControle.doFinishAlterar()}" value="Alterar"/> &nbsp; <h:commandButton action="clientes.faces" value="Cancelar" immediate="true"/> 
         </h:form>            
     </ui:define>
 </ui:composition>

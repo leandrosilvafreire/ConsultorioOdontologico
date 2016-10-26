@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 dyego.carmo
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package br.com.consultorio.repositorio;
 
@@ -13,68 +24,68 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Leandro
+ * @author dyego.carmo
  */
-public class ClienteRepositorio extends BasicoRepositorio{
+public class ClienteRepositorio extends BasicoRepositorio {
 
     private static final long serialVersionUID = 1L;
-    
+
     public ClienteRepositorio(EntityManager entityManager) {
         super(entityManager);
     }
-    
-    public Cliente getCliente(int idOfCliente){
-        return getEntity(Cliente.class, idOfCliente);
+
+    public Cliente addCliente(Cliente cliente) {
+        return addEntity(Cliente.class, cliente);
     }
-    
-    public Cliente setCliente(Cliente cliente){
+
+    public Cliente setCliente(Cliente cliente) {
         return setEntity(Cliente.class, cliente);
     }
     
-    public Cliente addCliente(Cliente cliente){
-        return addEntity(Cliente.class, cliente);
-    }
-    
-    public void removeCliente(Cliente cliente){
+
+    public void removeCliente(Cliente cliente) {
         removeEntity(cliente);
     }
-    
-    public List<Cliente> getClienteByName(String name){
-        
-        return getPureList(Cliente.class, "select cli from Cliente cli where cli.clinome like ?1", name+"%");
-        
+
+    public Cliente getCliente(int idOfCliente) {
+        return getEntity(Cliente.class, idOfCliente);
     }
-    
-    public List<Cliente> getClienteToCall(int month, int year){
+
+    public List<Cliente> getClienteByName(String name) {
+        return getPureList(Cliente.class, "select cus from Cliente cus where cus.clinome like ?1", name + "%");
+    }
+
+    public List<Cliente> getClientesToCall(int month, int year) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, (month-1));
+        cal.set(Calendar.MONTH, (month - 1));
         cal.set(Calendar.DAY_OF_MONTH, 1);
         Date dataInicial = cal.getTime();
-        
+
         cal.add(Calendar.MONTH, 1);
         cal.add(Calendar.DAY_OF_YEAR, -1);
         Date dataFinal = cal.getTime();
-        return getPureList(Cliente.class, "select orc.orccliente from Orcamento orc where orc.orcdata >= ?1 and orc.orcdata <=2", dataInicial, dataFinal);
+
+        return getPureList(Cliente.class, "select orc.orccliente from Orcamento orc where orc.orcdata >= ?1 and orc.orcdata <= ?2", dataInicial, dataFinal);
     }
-    
-    public List<Cliente> getClientesComPagamentoEmAberto(int idOfCliente){
-        return getPureList(Cliente.class, "select par.parorcamento.orccliente from Parcela par where par.parpago = ?1", idOfCliente,Boolean.FALSE);
+
+    public List<Cliente> getClientesComPagamentoEmAberto(int idOfCliente) {
+        return getPureList(Cliente.class, "select par.parOrcamento.orcCliente from Parcela par where par.parPago = ?1", idOfCliente, Boolean.FALSE);
     }
-    
-    public Date getUltimoAtendimento(int idOfCustomer){
-        try{
-        Date toReturn = getPurePojo(Date.class, "select max(orc.orcData) from Orcamento orc where orc.orcCliente.cliid = ?1", idOfCustomer);
-        return toReturn;
-        }catch(Exception e){
+
+    public Date getUltimoAtendimento(int idOfCliente) {
+        try {
+            Date toReturn = getPurePojo(Date.class, "select max(orc.orcdata) from Orcamento orc where orc.orccliente.cliid = ?1", idOfCliente);
+            return toReturn;
+        } catch (Exception e ) {
             e.printStackTrace();
             return null;
         }
     }
     
-    public int getClientesCount(){
-        Long toReturn = getPurePojo(Long.class, "select count(cus) from Cliente cus");
-        if(toReturn!=null)return toReturn.intValue();
+    public int getClientesCount() {
+        Long toReturn = getPurePojo(Long.class,"select count(cus) from Cliente cus");
+        if (toReturn != null) return toReturn.intValue();
         return 0;
     }
 }

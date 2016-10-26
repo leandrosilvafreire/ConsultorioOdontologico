@@ -40,6 +40,13 @@ abstract class BasicoRepositorio {
         return entityManager;
     }
     
+    
+        public <T> T refreshEntity(Class<T> classToCast,Object entity) {
+        entity = getEntityManager().merge(entity);
+        getEntityManager().refresh(entity);
+        return (T) entity;
+    }
+    
     protected <T> T addEntity(Class<T> classToCast,Object entity) {
         getEntityManager().persist(entity);
         return (T) entity; 

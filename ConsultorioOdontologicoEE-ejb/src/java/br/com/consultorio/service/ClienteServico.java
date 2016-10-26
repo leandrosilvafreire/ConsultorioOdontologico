@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Leandro
+ * Copyright (C) 2014 dyego.carmo
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,12 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package br.com.consultorio.service;
 
-import br.com.consultorio.repositorio.ClienteRepositorio;
 import br.com.consultorio.entity.Cliente;
+import br.com.consultorio.repositorio.ClienteRepositorio;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -46,47 +47,66 @@ public class ClienteServico extends BasicoServico {
 
     @PersistenceContext
     private EntityManager em;
-    private ClienteRepositorio customerRepositorio;
-    
+    private ClienteRepositorio clienteRepository;
+
     @PostActivate
     @PostConstruct
     private void postConstruct() {
-        customerRepositorio = new ClienteRepositorio(em);
+        clienteRepository = new ClienteRepositorio(em);
     }
-    
-    public Cliente addCliente(Cliente cliente) {
-        return customerRepositorio.addCliente(cliente);
+
+    public Cliente addCliente(Cliente cus) {
+        //cus.setCusAge(getIdade(cus.getCusBorndate()));
+        return clienteRepository.addCliente(cus);
     }
-    
-    public Cliente setCliente(Cliente cliente) {
-        return customerRepositorio.setCliente(cliente);
+
+    public Cliente setCliente(Cliente cus) {
+        //cus.setCusAge(getIdade(cus.getCusBorndate()));
+        return clienteRepository.setCliente(cus);
     }
-    
-    public void removeCliente(Cliente cliente) {
-        customerRepositorio.removeCliente(cliente);
+
+    private int getIdade(Date nascimento) {
+        Calendar dateOfBirth = new GregorianCalendar();
+        dateOfBirth.setTime(nascimento);
+        Calendar today = Calendar.getInstance();
+        int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+        dateOfBirth.add(Calendar.YEAR, age);
+        if (today.before(dateOfBirth)) {
+            age--;
+        }
+        return age;
     }
-    
-    public Cliente getCliente(int idOfCliente)  {
-        return customerRepositorio.getCliente(idOfCliente);
+
+    public void removeCliente(Cliente cus) {
+        clienteRepository.removeCliente(cus);
     }
-    
+
+    public Cliente getCliente(int idOfCliente) {
+        return clienteRepository.getCliente(idOfCliente);
+    }
+
     public List<Cliente> getClienteByName(String nameOfCliente) {
-        return customerRepositorio.getClienteByName(nameOfCliente);
+        return clienteRepository.getClienteByName(nameOfCliente);
     }
-    
-    public List<Cliente> getClientesToCall(int month,int year) {
-        return customerRepositorio.getClienteToCall(month, year);
+
+    public List<Cliente> getClientesToCall(int month, int year) {
+        return clienteRepository.getClientesToCall(month, year);
     }
-    
+
+    public Cliente refreshCustomer(Cliente cliente) {
+        clienteRepository.refreshEntity(Cliente.class, cliente);
+        return cliente;
+    }
+
     public List<Cliente> getClientesComPagamentoEmAberto(int ifOfCliente) {
-        return customerRepositorio.getClientesComPagamentoEmAberto(ifOfCliente);
+        return clienteRepository.getClientesComPagamentoEmAberto(ifOfCliente);
     }
-    
-    public Date getUltimoAtendimento(Integer idOfCustomer){
-        return customerRepositorio.getUltimoAtendimento(idOfCustomer);
+
+    public Date getUltimoAtendimento(int idOfCliente) {
+        return clienteRepository.getUltimoAtendimento(idOfCliente);
     }
-    
-    public int getClientesCount(){
-        return customerRepositorio.getClientesCount();
+
+    public int getClientesCount() {
+        return clienteRepository.getClientesCount();
     }
 }
