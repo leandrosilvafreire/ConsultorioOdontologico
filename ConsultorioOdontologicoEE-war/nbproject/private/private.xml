@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/ServiceControl.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/services.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/editService.xhtml</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/orcamentos.xhtml</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/ClienteControle.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/UsuarioControle.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/BasicoControle.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/clientes.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/menu.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/servlet/SairServlet.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/editCliente.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/servlet/filtro/AutenticacaoFiltro.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/addService.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/usuarios.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/base.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/index.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/sempermissao.xhtml</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/web/restrito/addCliente.xhtml</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/ConsultorioOdontologicoEE/ConsultorioOdontologicoEE-war/src/java/br/com/consultorio/controle/OrcamentoControle.java</file>
         </group>
     </open-files>
 </project-private>

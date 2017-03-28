@@ -25,6 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -54,13 +55,13 @@ public class Orcamento implements Serializable {
     @NotNull
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date orcdata;
+    private Date orcdata = new Date();
     
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
     @Temporal(TemporalType.TIME)
-    private Date orchora;
+    private Date orchora = new Date();
     
     @Lob
     @Size(max = 65535)
@@ -92,8 +93,8 @@ public class Orcamento implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oritorcamento")
     private List<Orcamentoitem> orcamentoitemList = new LinkedList<>();
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "anaorcamento")
-    private List<Anamnese> anamneseList = new LinkedList<>();
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "anaorcamento")
+    private Anamnese orcanamnese;
 
     public Orcamento() {
     }
@@ -118,10 +119,6 @@ public class Orcamento implements Serializable {
         orcamentoitemList.add(ori);
     }
     
-    public void addAnamnese(Anamnese anamnese){
-        anamnese.setAnaorcamento(this);
-        getAnamneseList().add(anamnese);
-    }
     
     public void addParcela(Parcela parcela){
         parcela.setParorcamento(this);
@@ -215,14 +212,15 @@ public class Orcamento implements Serializable {
         this.orcamentoitemList = orcamentoitemList;
     }
 
-    @XmlTransient
-    public List<Anamnese> getAnamneseList() {
-        return anamneseList;
+    public Anamnese getOrcanamnese() {
+        return orcanamnese;
     }
 
-    public void setAnamneseList(List<Anamnese> anamneseList) {
-        this.anamneseList = anamneseList;
+    public void setOrcanamnese(Anamnese orcanamnese) {
+        this.orcanamnese = orcanamnese;
     }
+
+   
 
     @Override
     public int hashCode() {

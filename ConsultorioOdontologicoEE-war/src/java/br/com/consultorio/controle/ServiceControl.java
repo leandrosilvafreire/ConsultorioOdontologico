@@ -73,8 +73,6 @@ public class ServiceControl extends BasicoControle implements java.io.Serializab
         return serviceService.getServicos();
     }
     
-    
-    
     public String getLocalizar() {
         return localizar;
     }

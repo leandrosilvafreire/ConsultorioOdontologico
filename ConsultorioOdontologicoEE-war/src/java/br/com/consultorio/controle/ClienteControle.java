@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.consultorio.controle;
 
 import br.com.consultorio.entity.Cliente;
@@ -27,7 +26,7 @@ public class ClienteControle extends BasicoControle implements java.io.Serializa
 
     @EJB
     private ClienteServico clienteService;
-    
+
     private List<Cliente> clientes;
     private Cliente selectedCliente;
     private String localizar;
@@ -57,7 +56,7 @@ public class ClienteControle extends BasicoControle implements java.io.Serializa
         clientes = clienteService.getClienteByName(localizar);
         return "/restrito/clientes.faces";
     }
-    
+
     private void cleanCache() {
         clientes = new LinkedList<>();
         setSelectedCliente(new Cliente());
@@ -66,7 +65,7 @@ public class ClienteControle extends BasicoControle implements java.io.Serializa
     public int getClientesCount() {
         return clienteService.getClientesCount();
     }
-    
+
     public String getUltimoAtendimento(Integer idOfCustomer) {
         Date toReturn = clienteService.getUltimoAtendimento(idOfCustomer);
         if (toReturn == null) {
@@ -74,16 +73,16 @@ public class ClienteControle extends BasicoControle implements java.io.Serializa
         }
         return getSdf().format(toReturn);
     }
-    
+
     public String doStartAddCliente() {
         cleanCache();
         return "/restrito/addCliente.faces";
     }
-    
-    public String doStartAlterar(){
+
+    public String doStartAlterar() {
         return "/restrito/editCliente.faces";
     }
-    
+
     public String doFinishAlterar() {
         if (existsViolationsForJSF(getSelectedCliente())) {
             return "/restrito/editCliente.faces";
@@ -91,11 +90,11 @@ public class ClienteControle extends BasicoControle implements java.io.Serializa
         clienteService.setCliente(getSelectedCliente());
         clienteService.refreshCustomer(getSelectedCliente());
         setSelectedCliente(null);
-        cleanCache();doLocalizar();
+        cleanCache();
+        doLocalizar();
         return "/restrito/clientes.faces";
     }
 
-    
     public String doFinishAddCliente() {
         if (existsViolationsForJSF(getSelectedCliente())) {
             return "/restrito/addCliente.faces";
@@ -106,4 +105,13 @@ public class ClienteControle extends BasicoControle implements java.io.Serializa
         setLocalizar(cus.getClinome());
         return "/restrito/clientes.faces";
     }
+    
+    public String doFinishExcluir(){
+        clienteService.removeCliente(selectedCliente);
+        getClientes().remove(getSelectedCliente());
+        return "/restrito/clientes.faces";
+    }
+    
+    
+    
 }

@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./base.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="titleOfPage">
+        Orçamentos do Cliente #{orcamentoControle.selectedCliente.clinome}
+    </ui:define>
+
+    <ui:define name="content">
+        <h2><img src="/ConsultorioOdontologicoEE-war/resources/images/atende.png"/>Atendendo Cliente #{orcamentoControle.selectedCliente.clinome}</h2>
+        <h:messages errorClass="msg_erro"/>
+        <hr/>
+        <br/>
+        <h3>Lista de Orçamentos Cadastrados</h3>
+        <h:form>
+            <c:if test="#{orcamentoControle.orcamentos.size() eq 0}">
+                Nenhum Orçamento Cadastrado
+            </c:if>
+            <h:dataTable rowClasses="linhaPar, linhaImpar" styleClass="tabelaBasica" var="item" value="#{orcamentoControle.orcamentos}" rendered="#{orcamentoControle.orcamentos.size() ne 0}">
+                <h:column>
+                    <f:facet name="header">
+                        Data
+                    </f:facet>
+                    <h:outputText value="#{item.orcdata}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>&nbsp;<h:outputText value="#{item.orchora}"><f:convertDateTime pattern="hh:mm:ss"/></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Itens
+                    </f:facet>
+                    #{orcamentoControle.getItensOfOrcamento(item)}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Dentista
+                    </f:facet>
+                    #{item.orcdentista.usunome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Total
+                    </f:facet>
+                    <h:outputText value="#{item.orctotal}"><f:convertNumber type="currency"/></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Obs Anamnese
+                    </f:facet>
+                    #{item.orcanamnese.anaobs}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Último Atendimento
+                    </f:facet>
+                    #{clienteControle.getUltimoAtendimento(item.orccliente.cliid)};
+                </h:column>
+                <h:column rendered="#{usuarioControle.loggedUser.usuadministrador eq true}">
+                    <f:facet name="header">
+                        Ações
+                    </f:facet>
+
+                    <h:commandLink title="Alterar" action="#{clienteControle.doStartAlterar()}"> 
+                        <h:graphicImage value="/resources/images/alterar.gif"/>&nbsp;
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteControle.selectedCliente}"/>
+                    </h:commandLink>
+                    <h:commandLink title="Excluir" action="#{clienteControle.doFinishExcluir()}" onclick="return confirm('Tem certeza que deseja excluir este orçamento?')"> 
+                        <h:graphicImage value="/resources/images/excluir.gif"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteControle.selectedCliente}"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <h3>Lista de Anamneses Feitas</h3>
+            <c:if test="#{anameneseControle.anamnesese.size() eq 0}">
+                Nenhuma Anamnese Cadastrada
+            </c:if>
+            <h:dataTable rowClasses="linhaPar, linhaImpar" styleClass="tabelaBasica" var="item" value="#{anameneseControle.anamnesese}" rendered="#{anameneseControle.anamnesese.size() ne 0}">
+                <h:column>
+                    <f:facet name="header">
+                        Data da Anamnese
+                    </f:facet>
+                    <h:outputText value="#{item.anadata}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>&nbsp;<h:outputText value="#{item.anahora}"><f:convertDateTime pattern="hh:mm:ss"/></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Último Dentista
+                    </f:facet>
+                    <h:outputText value=" #{item.anaorcamento.orcdentista.usunome}" rendered="#{!empty item.anaorcamento.orcdentista.usunome}"/>
+                    <h:outputText value="Nenhum" rendered="#{empty item.anaorcamento.orcdentista.usunome}"/>
+
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Observações
+                    </f:facet>
+                    #{item.anaobs}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Último Atendimento
+                    </f:facet>
+                    #{clienteControle.getUltimoAtendimento(item.anacliente.cliid)};
+                </h:column>
+                <h:column rendered="#{usuarioControle.loggedUser.usuadministrador eq true}">
+                    <f:facet name="header">
+                        Ações
+                    </f:facet>
+                    <h:commandLink title="Utilizar Anamnese" action="#{anameneseControle.doUseFinishAnamnese()}"> 
+                        <h:graphicImage value="/resources/images/usar.jpg"/>&nbsp;
+                        <f:setPropertyActionListener value="#{item}" target="#{clienteControle.selectedCliente}"/>
+                    </h:commandLink>
+                    <h:commandLink title="Alterar" action="#{anameneseControle.doStartAlterar()}"> 
+                        <h:graphicImage value="/resources/images/alterar.gif"/>&nbsp;
+                        <f:setPropertyActionListener value="#{item}" target="#{anameneseControle.selectedAnamnese}"/>
+                    </h:commandLink>
+                    <h:commandLink title="Excluir" action="#{anameneseControle.doFinishExcluir()}" onclick="return confirm('Tem certeza que deseja excluir esta anamnese?')"> 
+                        <h:graphicImage value="/resources/images/excluir.gif"/>
+                        <f:setPropertyActionListener value="#{item}" target="#{anameneseControle.selectedAnamnese}"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <br/>
+            <h:commandButton action="#{anameneseControle.doStartAddAnamnese()}" value="Adicionar uma nova anamnese"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

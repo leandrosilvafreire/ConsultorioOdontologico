@@ -149,6 +149,7 @@ public class Cliente implements Serializable {
     public void updateAge() {
         System.out.println("[Cliente Entity] Calling getIdade()..");
         setCliidade(getIdade(getClidatanascimento()));
+       
     }
     
     private int getIdade(Date nascimento) {

@@ -6,6 +6,7 @@
 package br.com.consultorio.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -65,7 +68,7 @@ public class Anamnese implements Serializable {
     @Column(nullable = false)
     private boolean anaoperacaorecente;
     
-    private Integer anadescricaooperacao;
+    private String anadescricaooperacao;
     
     @Basic(optional = false)
     @NotNull
@@ -104,8 +107,20 @@ public class Anamnese implements Serializable {
     private Cliente anacliente;
     
     @JoinColumn(name = "anaorcamento", referencedColumnName = "orcid", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Orcamento anaorcamento;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date anadata  = new Date();
+    
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIME)
+    private Date anahora  = new Date();
 
     public Anamnese() {
     }
@@ -173,11 +188,11 @@ public class Anamnese implements Serializable {
         this.anaoperacaorecente = anaoperacaorecente;
     }
 
-    public Integer getAnadescricaooperacao() {
+    public String getAnadescricaooperacao() {
         return anadescricaooperacao;
     }
 
-    public void setAnadescricaooperacao(Integer anadescricaooperacao) {
+    public void setAnadescricaooperacao(String anadescricaooperacao) {
         this.anadescricaooperacao = anadescricaooperacao;
     }
 
@@ -252,6 +267,24 @@ public class Anamnese implements Serializable {
     public void setAnaorcamento(Orcamento anaorcamento) {
         this.anaorcamento = anaorcamento;
     }
+
+    public Date getAnadata() {
+        return anadata;
+    }
+
+    public void setAnadata(Date anadata) {
+        this.anadata = anadata;
+    }
+
+    public Date getAnahora() {
+        return anahora;
+    }
+
+    public void setAnahora(Date anahora) {
+        this.anahora = anahora;
+    }
+    
+    
 
     @Override
     public int hashCode() {

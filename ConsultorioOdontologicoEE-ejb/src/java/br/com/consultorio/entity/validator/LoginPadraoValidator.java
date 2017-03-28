@@ -18,11 +18,7 @@ public class LoginPadraoValidator implements ConstraintValidator<LoginPadrao, St
     public void initialize(LoginPadrao constraintAnnotation) {
         System.out.println("[LoginPadraoValidator] Carregado com a mensagem - "+constraintAnnotation.message());
     }
-
-    
        
-    
-    
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
                return (value != null && value.contains(".") && value.charAt(value.length()-1) != '.');
